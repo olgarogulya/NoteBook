@@ -18,6 +18,16 @@ public class Note implements Serializable{
 		this.dateCreated = dateCreated;
 	}
 	
+	public Note(String textNote) {
+		this.textNote = textNote;
+		this.dateCreated = null;
+	}
+	
+	public Note(Date dateCreated) {
+		this.textNote = null;
+		this.dateCreated = dateCreated;
+	}
+	
 	public String getTextNote() { 
 		return textNote; 
 		}
@@ -33,6 +43,14 @@ public class Note implements Serializable{
     public void setDateCreated(Date dateCreated) { 
     	this.dateCreated = dateCreated; 
     	}
+    
+    public boolean equalContent(String content) {
+		return textNote.equals(content);
+	}
+    
+    public boolean equalDate(Date date) {
+		return dateCreated.equals(date);
+	}
 	
 	@Override
 	public boolean equals(Object obj) {

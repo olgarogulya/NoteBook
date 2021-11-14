@@ -3,36 +3,55 @@ package by.epam.training.notebook;
 import java.util.List;
 import java.util.Objects;
 import java.util.ArrayList;
-import by.epam.training.notebook.Note;
-
+import java.util.Date;
 
 public class NoteBook{
 	
 	private List<Note> notes;
-	private Note note;
 
 	public NoteBook() {
 		notes = new ArrayList<Note>();
 	}
 	
 	public void add(Note note) {
-		this.note = note;
 		notes.add(note);
 	}
 	
+	public void add(String textNote) {
+		notes.add(new Note(textNote));
+	}
+	
 	public void remove(Note note) {
-		this.note = note;
 		notes.remove(note);
 	}
 
-	@Override
-	public String toString() {
-		return "NoteBook [notes=" + notes + ", note=" + note + "]";
+	public int size() {
+		return notes.size();
+	}
+	
+	public Note findByContent(String content) {
+		
+		for(Note n : notes) {
+			if(n.equalContent(content)) {
+				return n;
+			}
+		}	
+		return null;
+	}
+	
+	public Note findByDate(Date date) {
+		
+		for(Note n : notes) {
+			if(n.equalDate(date)) {
+				return n;
+			}
+		}	
+		return null;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(note, notes);
+		return Objects.hash(notes);
 	}
 
 	@Override
@@ -44,7 +63,12 @@ public class NoteBook{
 		if (getClass() != obj.getClass())
 			return false;
 		NoteBook other = (NoteBook) obj;
-		return Objects.equals(note, other.note) && Objects.equals(notes, other.notes);
+		return Objects.equals(notes, other.notes);
+	}
+
+	@Override
+	public String toString() {
+		return "NoteBook [notes=" + notes + "]";
 	}
 	
 	
